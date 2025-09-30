@@ -1,7 +1,14 @@
+# Go to the bottom of the code
+# check 'example' variable
+# example is 2d array, each row is e1 e2 ..... en
+# last column is the class and every other column is a feature
+
+# learning rate can be changed inside the class, change self.learningRate
+
 class PTA:
     def __init__(self):
-        self.weights = {}
-        self.learningRate = 0.4
+        self.weights = {}   # stores my weights
+        self.learningRate = 0.4 # change this for different learning rate
 
     def train(self, input):
         # initialize my weights and start them at zero for the bias and the features
@@ -15,7 +22,7 @@ class PTA:
             # initialize with bias calculated first
             predicted = 1 * self.weights["w0"]
 
-            #
+            # adds up all the products to get v
             for i in range(len(input[r])-1):
                 predicted += self.weights["w" + str(i+1)] * input[r][i]
 
@@ -40,16 +47,18 @@ class PTA:
                 continue
             else:
                 r+=1 # if predicted is correct then move to the next input to check
-
+        # print out of the final calculated weights
         print(self.weights)
 
 
 
-
+# change this to test other stuff
 example = [[1,0,0],
            [1,1,1],
            [0,0,0]]
 
+
+# hw 4 question being tested here
 # example = [[0,0,1],
 #            [0,1,0],
 #            [1,0,0],
