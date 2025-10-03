@@ -1,14 +1,14 @@
 # Go to the bottom of the code
-# check 'example' variable
+# check 'example' variable to change input at line 57
 # example is 2d array, each row is e1 e2 ..... en
 # last column is the class and every other column is a feature
 
-# learning rate can be changed inside the class, change self.learningRate
+# learning rate can be changed inside the class, change self.learningRate at line 11
 
 class PTA:
     def __init__(self):
         self.weights = {}   # stores my weights
-        self.learningRate = 0.4 # change this for different learning rate
+        self.learningRate = 0.4 # change this for different learning rate, default should be 0.4
 
     def train(self, input):
         # initialize my weights and start them at zero for the bias and the features
@@ -33,21 +33,22 @@ class PTA:
                 predicted = 0
 
             print("Predicted: " + str(predicted) + "     " + "Actual: " + str(input[r][-1]))
-
+            # check if predicted is the same as actual
             if predicted != input[r][-1]: # updates weights if predicted is wrong
-                print("Prediction Wrong - Updating Weights")
+                print("Prediction Wrong - Updating Weights...")
                 # update the weight for the bias first
                 self.weights["w0"] = self.weights["w0"] + (self.learningRate * (input[r][-1] - predicted) * 1)
 
                 # update weights for the features
                 for i in range(len(input[r])-1):
                     self.weights["w"+str(i+1)] = self.weights["w"+str(i+1)] + (self.learningRate * (input[r][-1] - predicted) * input[r][i])
-
+                print("Updated Weights: ")
+                print(self.weights)
                 r = 0 # set r back to 0 to recheck all the inputs to see if all is predicted correctly
-                continue
             else:
-                r+=1 # if predicted is correct then move to the next input to check
+                r += 1 # if predicted is correct then move to the next input to check
         # print out of the final calculated weights
+        print("Final Weights: ")
         print(self.weights)
 
 
@@ -58,10 +59,8 @@ example = [[1,0,0],
            [0,0,0]]
 
 
-# hw 4 question being tested here
-# example = [[0,0,1],
-#            [0,1,0],
-#            [1,0,0],
-#            [1,1,0],]
+# example = [[1,0,0,1,0],
+#            [1,1,0,0,1],
+#            [0,0,1,1,0]]
 
 PTA().train(example)
